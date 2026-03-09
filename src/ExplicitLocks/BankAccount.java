@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class BankAccount {
     private int balance = 100;
     // Defining an explicit lock:
-    private Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
     //    Any thread invoking this function will wait
 //    until another thread which entered before completes its execution
@@ -32,7 +32,11 @@ public class BankAccount {
                         balance -= amount;
                         System.out.println(Thread.currentThread().getName() + " Completed Withdrawal of " + amount);
                     } catch (Exception e) {
-
+//                        if some error occured while withdrawing, then
+//                        interrupt the thread because it could not execute fully due to some errors
+//                        and record its state
+                        // good practice to perform cleanup operations, log exceptions before interrupt
+                        Thread.currentThread().interrupt();
                     } finally {
 //                        lock should always be unlocked in finally block
 //                        as its meant to be used for releasing resources
@@ -46,8 +50,12 @@ public class BankAccount {
                 System.out.println(Thread.currentThread().getName() + " couldn't acquire lock. Will Try later");
             }
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+//            Thread.currentThread().interrupt();
         }
-
+//        Now if i want to do some action in case thread was interrupted, rollback or anything
+//        I can just check if the current thread was interrupted or not
+        if(Thread.currentThread().isInterrupted()) {
+            System.out.println(Thread.currentThread().getName() + " is interrupted");
+        }
     }
 }
