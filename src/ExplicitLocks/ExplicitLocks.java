@@ -18,5 +18,9 @@ public class ExplicitLocks {
 
         t1.start();
         t2.start();
+
+        // Reentrant Example
+        Reenntrant_Example reenntrantExample = new Reenntrant_Example();
+        reenntrantExample.outerMethod();
     }
 }
