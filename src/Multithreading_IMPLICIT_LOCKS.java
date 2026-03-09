@@ -37,7 +37,7 @@ class MyThread extends Thread{
 }
 
 
-public class Main {
+public class Multithreading_IMPLICIT_LOCKS {
     public static void main(String[] args) throws InterruptedException {
         Counter counter = new Counter();
         // 2 threads incrementing the same counter object

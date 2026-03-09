@@ -13,6 +13,10 @@ public class ExplicitLocks {
                 bankAccount.withdrawAmount(10);
             }
         };
+        Thread t1 = new Thread(task,"Thread1");
+        Thread t2 = new Thread(task,"Thread2");
 
+        t1.start();
+        t2.start();
     }
 }
