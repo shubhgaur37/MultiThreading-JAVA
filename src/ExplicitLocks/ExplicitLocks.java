@@ -20,7 +20,7 @@ public class ExplicitLocks {
         t2.start();
 
         // Reentrant Example
-        Reenntrant_Example reenntrantExample = new Reenntrant_Example();
-        reenntrantExample.outerMethod();
+        Reenntrant_Example reentrantExample = new Reenntrant_Example();
+        reentrantExample.outerMethod();
     }
 }
