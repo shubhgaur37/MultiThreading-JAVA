@@ -1,9 +1,9 @@
 // Cyclic Dependency between resource execution
-class Resource1{
+class Resource1 {
     String name = "Resource1";
     Resource2 resource2;
 
-    public void setResource2(Resource2 resource2){
+    public void setResource2(Resource2 resource2) {
         this.resource2 = resource2;
     }
 
@@ -19,7 +19,7 @@ class Resource1{
     }
 }
 
-class Resource2{
+class Resource2 {
     String name = "Resource2";
     Resource1 resource1;
 
@@ -49,19 +49,27 @@ public class DeadLock_Example {
         r2.setResource1(r1);
 
 //        2 threads accessing resources
-        Runnable task1 = new Runnable(){
-            public void run(){
+        Runnable task1 = new Runnable() {
+            public void run() {
                 r1.startProcessing();
             }
         };
-// Deadlock causing scenario
-        Runnable task2 = new Runnable(){
-            public void run(){
-                r2.startProcessing();
+        // Deadlock causing scenario
+//        Runnable task2 = new Runnable(){
+//            public void run(){
+//                r2.startProcessing();
+//            }
+//        };
+
+        // Deadlock Prevention by forcing threads to acquire the resources in the same/predefined order
+        Runnable task2 = new Runnable() {
+            public void run() {
+                r1.startProcessing();
             }
         };
 
-        Thread thread1 = new Thread(task1,"Thread-1");
+
+        Thread thread1 = new Thread(task1, "Thread-1");
         Thread thread2 = new Thread(task2, "Thread-2");
 
         thread1.start();
