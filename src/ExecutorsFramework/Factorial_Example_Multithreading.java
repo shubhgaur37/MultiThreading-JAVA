@@ -2,6 +2,7 @@ package ExecutorsFramework;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +18,10 @@ public class Factorial_Example_Multithreading {
         System.out.println("MULTI THREADED FACTORIAL USING EXECUTORS FRAMEWORK");
 //        Initialise a thread pool of 9 threads
         ExecutorService executorService = Executors.newFixedThreadPool(9);
+
+        // Parent Interface of ExecutorService
+//        Executor executor = Executors.newFixedThreadPool(9);
+
         long startTime = System.currentTimeMillis();
 //        for storing threads
         List<Thread> threads = new ArrayList<>();
@@ -30,6 +35,11 @@ public class Factorial_Example_Multithreading {
             executorService.submit(() ->{
                 System.out.println("Num: " + finalNum + " | Factorial: " + factorial(finalNum));
             });
+
+            // execute method if we use executor
+//            executor.execute(() ->{
+//                System.out.println("Num: " + finalNum + " | Factorial: " + factorial(finalNum));
+//            });
         }
         // used to close threads when the work is fully completed, if this is not used
         // then the threads remain active and application keeps running(needed to manually stop)
