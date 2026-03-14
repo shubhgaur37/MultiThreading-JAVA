@@ -50,7 +50,13 @@ public class Factorial_Example_Multithreading {
         // always used after a shutdown method invokation
         try {
             // waits for maximum of 100 seconds(timeout) for all tasks to complete, or current thread interruption and then resumes
-            executorService.awaitTermination(100, TimeUnit.SECONDS);
+//            executorService.awaitTermination(100, TimeUnit.SECONDS);
+
+            // Unlimited Waiting for tasks to finish(not recommended)
+            while(!executorService.awaitTermination(300,TimeUnit.MILLISECONDS)){
+                System.out.println("WAITING FOR ALL THREADS TO COMPLETE");
+            }
+
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
