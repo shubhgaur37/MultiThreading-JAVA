@@ -1,4 +1,6 @@
-
+//Thread Safety
+//The below code is thread safe because it guarantees that no unexpected results would be produced i.e. no
+//race conditions or data corruptions would be there.
 class SharedResource{
     int data;
     boolean hasData;
