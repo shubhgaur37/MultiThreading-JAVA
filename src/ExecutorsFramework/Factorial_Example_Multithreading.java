@@ -6,10 +6,13 @@ import java.util.List;
 public class Factorial_Example_Multithreading {
 
     public static void main(String[] args) {
-        printFactorialSingleThreaded();
-        printFactorialMultiThreaded();
-    }
 
+//        printFactorialSingleThreaded();
+//        printFactorialMultiThreaded();
+    }
+    public static void printFactorialThreadPool(){
+
+    }
     public static void printFactorialSingleThreaded(){
         System.out.println("SINGLE THREADED FACTORIAL");
         long startTime = System.currentTimeMillis(); // milliseconds elapsed from 01 JAN 1970 00:00 UTC
@@ -38,10 +41,17 @@ public class Factorial_Example_Multithreading {
             });
             threads.add(thread);
             thread.start();
+//            Incorrect: will work as single threaded, because main thread waits for current thread to complete
+//            and then resumes the loop
+//            try {
+//                thread.join();
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
         }
 //        Important step: main thread needs to wait until all threads have finished
 //        if this is not there then we directly print the time before even calculating the factorial of all numbers
-
+//        Manually managing threads
         for(Thread thread : threads) {
             try {
                 thread.join();
